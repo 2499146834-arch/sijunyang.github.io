@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yang Sijun — AI & Data Science</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0e0e0e;
+    --white: #f5f2ed;
+    --cream: #ede9e2;
+    --accent: #2a5caa;
+    --accent-light: #d6e4f7;
+    --muted: #6b6560;
+    --border: rgba(14,14,14,0.12);
+    --card-bg: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 60px;
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* SECTIONS */
+  section { padding: 100px 5vw 80px; }
+  section:first-of-type { padding-top: 140px; }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    max-width: 1100px;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 7vw, 88px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-tagline {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--muted);
+    background: var(--card-bg);
+    letter-spacing: 0.04em;
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: center;
+    padding-bottom: 2rem;
+  }
+  .hero-stat {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+  }
+  .hero-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    line-height: 1.1;
+    color: var(--black);
+  }
+  .hero-stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .hero-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 5rem 0 0;
+  }
+  .scroll-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+  }
+
+  /* SECTION HEADERS */
+  .section-header { margin-bottom: 3.5rem; }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  /* ABOUT */
+  #about { background: var(--cream); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 5rem;
+    max-width: 1100px;
+    align-items: start;
+  }
+  .about-body {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: #2a2a2a;
+  }
+  .about-body p { margin-bottom: 1.2rem; }
+  .edu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .edu-school {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .edu-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .strengths { list-style: none; }
+  .strengths li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .strengths li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+  }
+  .skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .skill-card-icon {
+    width: 36px; height: 36px;
+    background: var(--accent-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 16px;
+  }
+  .skill-card-title {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .skill-list li:last-child { border-bottom: none; }
+  .skill-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--cream); }
+  .projects-list { max-width: 1100px; display: flex; flex-direction: column; gap: 2rem; }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+  }
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .project-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .project-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--black);
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 3rem;
+    margin-bottom: 1.5rem;
+  }
+  .project-field-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .project-field-value {
+    font-size: 14px;
+    color: #3a3a3a;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .project-outcome {
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .project-outcome-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .project-outcome-value {
+    font-size: 14px;
+    color: var(--black);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .project-contribution {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* RESUME */
+  .resume-wrapper { max-width: 780px; }
+  .resume-section { margin-bottom: 3rem; }
+  .resume-section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .resume-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    align-items: start;
+  }
+  .resume-item-title { font-weight: 500; font-size: 15px; }
+  .resume-item-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .resume-item-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .resume-skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .resume-skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--muted);
+    background: var(--card-bg);
+  }
+  .resume-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2rem;
+    padding: 12px 24px;
+    background: var(--black);
+    color: var(--white);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .resume-download:hover { opacity: 0.8; }
+
+  /* CONTACT */
+  #contact { background: var(--black); color: var(--white); }
+  #contact .section-num { color: #6699dd; }
+  #contact .section-title { color: var(--white); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1100px;
+    align-items: start;
+  }
+  .contact-intro {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245,242,237,0.65);
+    margin-bottom: 2rem;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .contact-item-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.4);
+    min-width: 60px;
+  }
+  .contact-item-value {
+    font-size: 15px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .contact-item-value:hover { color: #6699dd; }
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .available-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: #4ade80;
+    margin-bottom: 1.5rem;
+  }
+  .available-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .contact-cta {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 2rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: rgba(245,242,237,0.3);
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* FADE IN ANIMATION */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .project-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-name { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">Yang Sijun</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-grid fade-in">
+    <div>
+      <p class="hero-eyebrow">Available for Internship · 2025–2026</p>
+      <h1 class="hero-name">Yang<br><em>Sijun</em></h1>
+      <p class="hero-tagline">Aspiring AI & Data Science Engineer, seeking opportunities in machine learning, computer vision, and intelligent systems.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">Data Science</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num">72%</div>
+        <div class="hero-stat-label">Top-1 accuracy on CIFAR-100</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">0.99</div>
+        <div class="hero-stat-label">AUC score, image classification</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">Jun 2026</div>
+        <div class="hero-stat-label">Expected graduation, Lingnan University</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+  <p class="scroll-hint">↓ Scroll to explore</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <p class="section-num">01 — About Me</p>
+    <h2 class="section-title">Who I am</h2>
+  </div>
+  <div class="about-grid fade-in">
+    <div>
+      <div class="about-body">
+        <p>I am a final-year Data Science student at Lingnan University, Hong Kong, expected to graduate in June 2026. My academic journey has been centred on applied machine learning, with hands-on experience building deep learning models in PyTorch for real-world classification tasks.</p>
+        <p>I am passionate about bridging the gap between research and engineering — designing systems that are not only accurate but also interpretable and efficient. I enjoy the full lifecycle of ML projects: from problem framing and data analysis through model design, systematic experimentation, and clear communication of results.</p>
+        <p>I am actively seeking internship or graduate-level opportunities in AI engineering, machine learning, or data science, where I can contribute to impactful, production-grade projects.</p>
+      </div>
+    </div>
+    <div>
+      <div class="edu-card">
+        <div class="edu-school">Lingnan University, Hong Kong</div>
+        <div class="edu-detail">
+          BSc Data Science<br>
+          Expected Graduation: June 2026
+        </div>
+      </div>
+      <ul class="strengths">
+        <li>End-to-end ML pipeline development — data through evaluation</li>
+        <li>Deep learning model design with attention mechanisms</li>
+        <li>Systematic ablation experiments and result analysis</li>
+        <li>Clear technical writing and academic communication</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <p class="section-num">02 — Skills</p>
+    <h2 class="section-title">What I can do</h2>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-card">
+      <div class="skill-card-icon">⚙</div>
+      <div class="skill-card-title">Technical Skills</div>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>Python (proficient)</li>
+        <li><span class="skill-dot"></span>PyTorch 2.0 — model design & training</li>
+        <li><span class="skill-dot"></span>CNNs & attention mechanisms (SE blocks)</li>
+        <li><span class="skill-dot"></span>Loss function tuning & regularisation</li>
+        <li><span class="skill-dot"></span>ROC-AUC, accuracy, confusion matrix</li>
+        <li><span class="skill-dot"></span>Basic SQL</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">◈</div>
+      <div class="skill-card-title">Analytical & Business Skills</div>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>Ablation study & experiment design</li>
+        <li><span class="skill-dot"></span>Results interpretation & visualisation</li>
+        <li><span class="skill-dot"></span>Technical documentation & reporting</li>
+        <li><span class="skill-dot"></span>Group project coordination</li>
+        <li><span class="skill-dot"></span>Problem framing & hypothesis testing</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">▣</div>
+      <div class="skill-card-title">Tools & Libraries</div>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>PyTorch, torchvision</li>
+        <li><span class="skill-dot"></span>scikit-learn</li>
+        <li><span class="skill-dot"></span>Matplotlib, NumPy</li>
+        <li><span class="skill-dot"></span>Git & GitHub</li>
+        <li><span class="skill-dot"></span>LaTeX / Microsoft Office</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <p class="section-num">03 — Projects</p>
+    <h2 class="section-title">Selected work</h2>
+  </div>
+  <div class="projects-list">
+
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-type">Group Project</span>
+        <span class="project-date">Jan – Apr 2025</span>
+      </div>
+      <div class="project-title">CIFAR-100 Image Classification<br>with SE-Attention ResNet</div>
+      <div class="project-grid">
+        <div>
+          <div class="project-field-label">Problem</div>
+          <div class="project-field-value">General-purpose classifiers treat all feature channels equally, limiting focus on semantically meaningful patterns across 100 fine-grained object categories.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Data</div>
+          <div class="project-field-value">CIFAR-100 benchmark — 60,000 colour images (32×32 px), 100 classes, 50K training / 10K test split.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Approach</div>
+          <div class="project-field-value">ResNet-18 backbone augmented with Squeeze-and-Excitation (SE) attention blocks in PyTorch 2.0. Three ablation experiments: loss functions, learning rate schedules, batch size effects.</div>
+        </div>
+        <div>
+          <div class="project-field-label">My Contribution</div>
+          <div class="project-field-value">Led SE block integration, designed and ran all ablation experiments, produced evaluation visualisations, co-authored the final report.</div>
+        </div>
+      </div>
+      <div class="project-outcome">
+        <div class="project-outcome-label">Outcome / Impact</div>
+        <div class="project-outcome-value">~72% top-1 accuracy and AUC 0.99 on the test set. Label smoothing + cosine LR schedule consistently improved validation performance across all runs.</div>
+      </div>
+    </div>
+
+    <!-- Project 2 placeholder — replace with your individual project -->
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-type">Individual Project</span>
+        <span class="project-date">2024 – 2025</span>
+      </div>
+      <div class="project-title">Your Individual Project Title Here</div>
+      <div class="project-grid">
+        <div>
+          <div class="project-field-label">Problem</div>
+          <div class="project-field-value">Describe the problem you solved.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Data</div>
+          <div class="project-field-value">Data source, size, key fields.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Approach</div>
+          <div class="project-field-value">Methods, models, pipeline used.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Outcome</div>
+          <div class="project-field-value">Results and value created.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-header fade-in">
+    <p class="section-num">04 — Resume</p>
+    <h2 class="section-title">Experience & background</h2>
+  </div>
+  <div class="resume-wrapper fade-in">
+    <div class="resume-section">
+      <div class="resume-section-title">Education</div>
+      <div class="resume-item">
+        <div>
+          <div class="resume-item-title">Lingnan University</div>
+          <div class="resume-item-sub">BSc Data Science · Hong Kong</div>
+        </div>
+        <div class="resume-item-date">2022 – Jun 2026</div>
+      </div>
+    </div>
+    <div class="resume-section">
+      <div class="resume-section-title">Projects</div>
+      <div class="resume-item">
+        <div>
+          <div class="resume-item-title">CIFAR-100 Image Classification with SE-Attention ResNet</div>
+          <div class="resume-item-sub">Group project · CDS 525 Applied Deep Learning · Lingnan University</div>
+        </div>
+        <div class="resume-item-date">2025</div>
+      </div>
+    </div>
+    <div class="resume-section">
+      <div class="resume-section-title">Skills</div>
+      <div class="resume-skills-grid">
+        <span class="resume-skill-tag">Python</span>
+        <span class="resume-skill-tag">PyTorch</span>
+        <span class="resume-skill-tag">Deep Learning</span>
+        <span class="resume-skill-tag">Computer Vision</span>
+        <span class="resume-skill-tag">scikit-learn</span>
+        <span class="resume-skill-tag">NumPy</span>
+        <span class="resume-skill-tag">Matplotlib</span>
+        <span class="resume-skill-tag">Git</span>
+        <span class="resume-skill-tag">SQL</span>
+        <span class="resume-skill-tag">LaTeX</span>
+      </div>
+    </div>
+    <a href="#" class="resume-download">↓ Download Full CV (PDF)</a>
+    <p style="margin-top: 12px; font-size: 12px; color: var(--muted);">(Replace # with your PDF link after uploading your CV to GitHub)</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <p class="section-num">05 — Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+  </div>
+  <div class="contact-grid fade-in">
+    <div>
+      <p class="contact-intro">I'm open to internship and graduate-level opportunities in AI, machine learning, and data science. Feel free to reach out — I'd love to connect.</p>
+      <div class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <a href="mailto:yangsijun233@gmail.com" class="contact-item-value">yangsijun233@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">GitHub</span>
+        <a href="https://github.com/sijunyang" target="_blank" class="contact-item-value">github.com/sijunyang</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Location</span>
+        <span class="contact-item-value">Hong Kong · Open to relocation</span>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="available-badge">
+        <span class="available-dot"></span>
+        Currently available
+      </div>
+      <div class="contact-cta">Let's build something meaningful together.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Yang Sijun · sijunyang.github.io
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

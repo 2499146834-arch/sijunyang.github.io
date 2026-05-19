@@ -1,1 +1,567 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yang Sijun — AI Engineer</title>
+<meta name="description" content="Yang Sijun — AI Engineer seeking roles in machine learning, computer vision, and LLM fine-tuning. MSc Data Science, Lingnan University.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0e0e0e;
+    --white: #f5f2ed;
+    --cream: #ede9e2;
+    --accent: #2a5caa;
+    --accent-light: #d6e4f7;
+    --muted: #6b6560;
+    --border: rgba(14,14,14,0.12);
+    --card-bg: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); font-size: 16px; line-height: 1.7; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 60px;
+    background: rgba(245,242,237,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.02em; color: var(--black); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--black); }
+
+  section { padding: 100px 5vw 80px; }
+
+  /* HERO */
+  #home { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 100px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; max-width: 1100px; }
+  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(52px, 7vw, 88px); line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-tagline { font-size: 17px; font-weight: 300; color: var(--muted); max-width: 460px; line-height: 1.8; margin-bottom: 2.5rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 11px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 100px; color: var(--muted); background: var(--card-bg); letter-spacing: 0.04em; }
+  .hero-right { display: flex; flex-direction: column; gap: 1.5rem; align-self: center; padding-bottom: 2rem; }
+  .hero-stat { border-left: 2px solid var(--accent); padding-left: 1.25rem; }
+  .hero-stat-num { font-family: 'DM Serif Display', serif; font-size: 36px; line-height: 1.1; color: var(--black); }
+  .hero-stat-label { font-size: 13px; color: var(--muted); font-weight: 300; }
+  .hero-divider { width: 100%; height: 1px; background: var(--border); margin: 5rem 0 0; }
+  .scroll-hint { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1.5rem; }
+
+  .section-header { margin-bottom: 3.5rem; }
+  .section-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.02em; }
+
+  /* ABOUT */
+  #about { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; max-width: 1100px; align-items: start; }
+  .about-body { font-size: 17px; font-weight: 300; line-height: 1.85; color: #2a2a2a; }
+  .about-body p { margin-bottom: 1.2rem; }
+  .about-body em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .edu-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+  .edu-school { font-weight: 500; font-size: 15px; margin-bottom: 4px; }
+  .edu-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .strengths { list-style: none; margin-top: 1.5rem; }
+  .strengths li { font-size: 14px; color: var(--muted); padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .strengths li::before { content: '→'; color: var(--accent); font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; }
+  .skill-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; }
+  .skill-card-icon { width: 36px; height: 36px; background: var(--accent-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 16px; }
+  .skill-card-title { font-weight: 500; font-size: 15px; margin-bottom: 1rem; letter-spacing: -0.01em; }
+  .skill-list { list-style: none; }
+  .skill-list li { font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .skill-list li:last-child { border-bottom: none; }
+  .skill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* PROJECTS */
+  #projects { background: var(--cream); }
+  .projects-list { max-width: 1100px; display: flex; flex-direction: column; gap: 2rem; }
+  .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
+  .project-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .project-type { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 100px; }
+  .project-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .project-title { font-family: 'DM Serif Display', serif; font-size: 24px; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.5rem; }
+  .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem 3rem; margin-bottom: 1.5rem; }
+  .project-field-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .project-field-value { font-size: 14px; color: #3a3a3a; line-height: 1.6; font-weight: 300; }
+  .project-outcome { background: var(--accent-light); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 0; }
+  .project-outcome-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .project-outcome-value { font-size: 14px; color: var(--black); line-height: 1.6; }
+
+  /* EXPERIENCE */
+  .exp-list { max-width: 780px; }
+  .exp-item { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+  .exp-title { font-weight: 500; font-size: 15px; margin-bottom: 2px; }
+  .exp-company { font-size: 13px; color: var(--accent); margin-bottom: 8px; }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li { font-size: 13px; color: var(--muted); padding: 3px 0; display: flex; gap: 8px; line-height: 1.5; }
+  .exp-bullets li::before { content: '–'; color: var(--accent); flex-shrink: 0; }
+
+  /* RESUME */
+  #resume { background: var(--cream); }
+  .resume-wrapper { max-width: 780px; }
+  .resume-section { margin-bottom: 2.5rem; }
+  .resume-section-title { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .resume-item { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; margin-bottom: 1rem; align-items: start; }
+  .resume-item-title { font-weight: 500; font-size: 15px; }
+  .resume-item-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .resume-item-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .resume-skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .resume-skill-tag { font-family: 'DM Mono', monospace; font-size: 12px; padding: 4px 12px; border: 1px solid var(--border); border-radius: 100px; color: var(--muted); background: var(--card-bg); }
+  .cert-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cert-tag { font-size: 13px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--card-bg); }
+  .resume-download { display: inline-flex; align-items: center; gap: 8px; margin-top: 2rem; padding: 12px 24px; background: var(--black); color: var(--white); border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
+  .resume-download:hover { opacity: 0.8; }
+
+  /* CONTACT */
+  #contact { background: var(--black); color: var(--white); }
+  #contact .section-num { color: #6699dd; }
+  #contact .section-title { color: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1100px; align-items: start; }
+  .contact-intro { font-size: 17px; font-weight: 300; line-height: 1.8; color: rgba(245,242,237,0.65); margin-bottom: 2rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .contact-item-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,242,237,0.4); min-width: 60px; }
+  .contact-item-value { font-size: 15px; color: var(--white); text-decoration: none; }
+  .contact-item-value:hover { color: #6699dd; }
+  .available-badge { display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #4ade80; margin-bottom: 1.5rem; }
+  .available-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .contact-cta { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.2; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
+
+  footer { background: var(--black); color: rgba(245,242,237,0.3); text-align: center; padding: 2rem; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .project-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-name { font-size: 44px; }
+    .project-card { padding: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">Yang Sijun</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-grid fade-in">
+    <div>
+      <p class="hero-eyebrow">Open to Internship &amp; Full-Time · AI Engineer / Algorithm Engineer</p>
+      <h1 class="hero-name">Yang<br><em>Sijun</em></h1>
+      <p class="hero-tagline">AI Engineer building practical machine learning systems — from LoRA-fine-tuned 7B financial LLMs to production-grade vision models on a single GPU. MSc Data Science at Lingnan University, Hong Kong.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">LLM Fine-tuning</span>
+        <span class="tag">LoRA</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">YOLO</span>
+        <span class="tag">ResNet</span>
+        <span class="tag">Transfer Learning</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num">+43.4<span style="font-size:24px">pts</span></div>
+        <div class="hero-stat-label">FinQA accuracy lift — FinBridge LLM distillation</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">99.7%</div>
+        <div class="hero-stat-label">Precision / recall — Dual-YOLO parking detection</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">98.98%</div>
+        <div class="hero-stat-label">Accuracy with ~9× smaller model — Cats vs. Dogs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Shipped ML / CV / LLM projects</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+  <p class="scroll-hint">↓ Scroll to explore</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <p class="section-num">01 — About Me</p>
+    <h2 class="section-title">Who I am</h2>
+  </div>
+  <div class="about-grid fade-in">
+    <div>
+      <div class="about-body">
+        <p>I am Yang Sijun (杨思骏), a 23-year-old AI engineer finishing my MSc in Data Science at Lingnan University, Hong Kong. My work sits at the intersection of <em>LLM fine-tuning</em> and <em>applied computer vision</em>.</p>
+        <p>I have hands-on experience independently fine-tuning 7B LLMs via LoRA on LLaMA-Factory, designing end-to-end training pipelines in PyTorch, and building real-time inference systems with YOLO and MobileNetV2. I care less about chasing benchmarks and more about building models that actually ship — auditable, lightweight, and deployable on a single GPU.</p>
+        <p>Having studied across mainland China and Hong Kong, I am comfortable working in cross-border teams with native Cantonese and Mandarin, plus solid English (IELTS 6.0). I am actively seeking AI engineer, algorithm engineer, and data science roles in Shenzhen, Hong Kong, or remote.</p>
+      </div>
+    </div>
+    <div>
+      <div class="edu-card">
+        <div class="edu-school">Lingnan University, Hong Kong</div>
+        <div class="edu-detail">MSc Data Science · 09/2025 – 06/2026<br>Machine Learning · Deep Learning · Computer Vision · Data Mining · Artificial Intelligence</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">Guangzhou Maritime University</div>
+        <div class="edu-detail">BA Economics &amp; Management · 09/2021 – 06/2025</div>
+      </div>
+      <ul class="strengths">
+        <li>End-to-end ownership — from data leak detection to final model deployment</li>
+        <li>Disciplined experimentation: multi-seed controls, progressive ablations, honest negative results</li>
+        <li>Single-GPU efficiency — LoRA, mixed-precision, VRAM debugging, ~9× model compression</li>
+        <li>Bilingual technical communication: Cantonese (native), Mandarin (native), English (IELTS 6.0)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <p class="section-num">02 — Skills</p>
+    <h2 class="section-title">What I can do</h2>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-card">
+      <div class="skill-card-icon">⚙</div>
+      <div class="skill-card-title">Engineering / ML Skills</div>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>Python (proficient)</li>
+        <li><span class="skill-dot"></span>PyTorch — model design &amp; training</li>
+        <li><span class="skill-dot"></span>TensorFlow / Keras — CNN training</li>
+        <li><span class="skill-dot"></span>LoRA fine-tuning on LLaMA-Factory</li>
+        <li><span class="skill-dot"></span>Qwen2.5-7B / LLaMA-based architectures</li>
+        <li><span class="skill-dot"></span>YOLO · ResNet · MobileNetV2 transfer learning</li>
+        <li><span class="skill-dot"></span>Mixed-precision training &amp; GPU memory optimisation</li>
+        <li><span class="skill-dot"></span>Claude Code (AI-assisted development)</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">◈</div>
+      <div class="skill-card-title">Methods &amp; Analysis</div>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>Knowledge distillation &amp; chain-of-thought (CoT)</li>
+        <li><span class="skill-dot"></span>Supervised fine-tuning (SFT)</li>
+        <li><span class="skill-dot"></span>Attention mechanisms (SE-block etc.)</li>
+        <li><span class="skill-dot"></span>Collaborative filtering &amp; association-rule mining</li>
+        <li><span class="skill-dot"></span>Cosine annealing &amp; label smoothing</li>
+        <li><span class="skill-dot"></span>Progressive ablation &amp; multi-seed reproducibility</li>
+        <li><span class="skill-dot"></span>Offline-eval design &amp; data-leak detection</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">▣</div>
+      <div class="skill-card-title">Tools &amp; Platforms</div>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>LLaMA-Factory</li>
+        <li><span class="skill-dot"></span>torchvision · Ultralytics YOLO</li>
+        <li><span class="skill-dot"></span>scikit-learn · NumPy · pandas</li>
+        <li><span class="skill-dot"></span>Matplotlib · Gradio</li>
+        <li><span class="skill-dot"></span>Git &amp; GitHub</li>
+        <li><span class="skill-dot"></span>Jupyter Notebook / Google Colab</li>
+        <li><span class="skill-dot"></span>LaTeX · Microsoft Office</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <p class="section-num">03 — Projects</p>
+    <h2 class="section-title">Selected work</h2>
+  </div>
+  <div class="projects-list">
+
+    <!-- Project 1 — FinBridge -->
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-type">Individual Project</span>
+        <span class="project-date">02/2026 – 05/2026</span>
+      </div>
+      <div class="project-title">FinBridge — Knowledge Distillation for Financial LLMs</div>
+      <div class="project-grid">
+        <div>
+          <div class="project-field-label">Problem</div>
+          <div class="project-field-value">Open-source 7B LLMs hallucinate badly on financial QA — unusable for audit-sensitive deployments requiring traceable reasoning.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Data</div>
+          <div class="project-field-value">FinQA benchmark plus teacher traces distilled from a commercial LLM, covering numeric reasoning and multi-step financial calculations.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Approach</div>
+          <div class="project-field-value">LoRA fine-tuning of Qwen2.5-7B on LLaMA-Factory. Student was forced to emit executable "computation programs" instead of direct answers; ran 6 controlled ablations to quantify each training stage.</div>
+        </div>
+        <div>
+          <div class="project-field-label">My Contribution</div>
+          <div class="project-field-value">Sole owner — data pipeline, LoRA configs, ablation design, evaluation methodology, and final reporting.</div>
+        </div>
+      </div>
+      <div class="project-outcome">
+        <div class="project-outcome-label">Outcome / Impact</div>
+        <div class="project-outcome-value">FinQA accuracy improved <strong>22% → 65.39%</strong> (+43.4 pts), with auditable step-by-step outputs and single-GPU deployment on an RTX 5060 Ti. Hallucinations sharply reduced versus base model.</div>
+      </div>
+    </div>
+
+    <!-- Project 2 — Cats vs Dogs -->
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-type">Individual Project</span>
+        <span class="project-date">02/2026 – 03/2026</span>
+      </div>
+      <div class="project-title">Cats vs. Dogs — Two-Stage Transfer Learning for Mobile Deploy</div>
+      <div class="project-grid">
+        <div>
+          <div class="project-field-label">Problem</div>
+          <div class="project-field-value">An original from-scratch CNN reached only 89% with errors concentrated in low-light scenes — blocking mobile deployment.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Data</div>
+          <div class="project-field-value">Cats vs. Dogs benchmark (25K images) augmented with a targeted low-light augmentation pipeline.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Approach</div>
+          <div class="project-field-value">Rearchitected to MobileNetV2 with a "freeze-backbone then fine-tune" two-stage strategy. Led the production redesign end-to-end.</div>
+        </div>
+        <div>
+          <div class="project-field-label">My Contribution</div>
+          <div class="project-field-value">Led the rearchitecture for production — full ownership of model selection, augmentation design, evaluation, and deployment readiness.</div>
+        </div>
+      </div>
+      <div class="project-outcome">
+        <div class="project-outcome-label">Outcome / Impact</div>
+        <div class="project-outcome-value">Accuracy rose to <strong>98.98%</strong> while model size shrank <strong>~9×</strong> — far better suited for mobile deployment than the original CNN.</div>
+      </div>
+    </div>
+
+    <!-- Project 3 — Parking -->
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-type">Individual Project</span>
+        <span class="project-date">02/2026 – 03/2026</span>
+      </div>
+      <div class="project-title">Real-Time Parking Detection — Dual-YOLO Fine-Tuning</div>
+      <div class="project-grid">
+        <div>
+          <div class="project-field-label">Problem</div>
+          <div class="project-field-value">Smart-parking scenes mix fixed CCTV with handheld phone shots, which no single detector handled well in real time.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Data</div>
+          <div class="project-field-value">Two heterogeneous splits — fixed CCTV footage plus handheld phone imagery — kept at native resolution for true-scale fine-tuning.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Approach</div>
+          <div class="project-field-value">Designed a "specialist + generalist" dual-YOLO setup with true-scale fine-tuning in the final stage. Diagnosed and fixed recurring VRAM crashes during training.</div>
+        </div>
+        <div>
+          <div class="project-field-label">My Contribution</div>
+          <div class="project-field-value">Sole owner — dataset split design, dual-model training, VRAM debugging, and benchmark comparison against the original paper.</div>
+        </div>
+      </div>
+      <div class="project-outcome">
+        <div class="project-outcome-label">Outcome / Impact</div>
+        <div class="project-outcome-value">Both models exceeded <strong>99.4% accuracy</strong> and <strong>99.7% precision / recall</strong> — a <strong>5.4-point gain over the original paper</strong>, meeting industrial real-time requirements.</div>
+      </div>
+    </div>
+
+    <!-- Project 4 — AODL -->
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-type">Group Project · Team "Latent Space"</span>
+        <span class="project-date">01/2026 – 02/2026</span>
+      </div>
+      <div class="project-title">AODL — CIFAR-100 Image Classification (ResNet-18 + SE Attention)</div>
+      <div class="project-grid">
+        <div>
+          <div class="project-field-label">Problem</div>
+          <div class="project-field-value">Reference baseline reached only 72% Top-1 with architectural claims (the SE attention "gain") unvalidated by controlled experiments.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Data</div>
+          <div class="project-field-value">CIFAR-100 benchmark — 60,000 colour images (32×32 px), 100 classes, 50K training / 10K test split. Trained on CUDA GPU with PyTorch.</div>
+        </div>
+        <div>
+          <div class="project-field-label">Approach</div>
+          <div class="project-field-value">Rebuilt the pipeline in PyTorch with cosine annealing, label smoothing (0.1), and mixed-precision training. Ran 3-seed controls isolating the SE attention module.</div>
+        </div>
+        <div>
+          <div class="project-field-label">My Contribution</div>
+          <div class="project-field-value">Co-led experiment design, owned the ablation pipeline and multi-seed reproducibility study — surfaced that the SE claim did not hold up. Contributed to the final report and presentation.</div>
+        </div>
+      </div>
+      <div class="project-outcome">
+        <div class="project-outcome-label">Outcome / Impact</div>
+        <div class="project-outcome-value">Top-1 accuracy rose to <strong>75.66%</strong> with <strong>1.5–2× faster training</strong>. Controlled study showed the SE block gave no significant gain on this task — <em>correcting the original claim</em>.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <p class="section-num">04 — Experience</p>
+    <h2 class="section-title">Internship work</h2>
+  </div>
+  <div class="exp-list fade-in">
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-title">Big Data Analytics Intern</div>
+        <div class="exp-company">Foshan Yixin Network Technology Platform</div>
+        <ul class="exp-bullets">
+          <li>Framed an e-commerce review-overload problem as automatic "review text → star rating" classification, with ratings as a quantitative anchor for sentiment.</li>
+          <li>Built the full data pipeline end-to-end; identified and fixed a data leak that was inflating offline metrics.</li>
+          <li>Benchmarked several mainstream models via cross-validation; selected one that held up robustly on a strict test split.</li>
+        </ul>
+      </div>
+      <div class="exp-date">07/2024 – 09/2024</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-title">Recommendation Algorithm Intern</div>
+        <div class="exp-company">Qiye (Foshan) Software Co., Ltd.</div>
+        <ul class="exp-bullets">
+          <li>Diagnosed two client problems (chiller energy efficiency, content-platform cold-start churn) as one root cause — "unverifiable black-box decisions".</li>
+          <li>Applied association-rule mining to identify the most stable chiller temperature band as the basis for energy-saving scheduling.</li>
+          <li>For recommendations, pinpointed insufficient cold-start exposure as the root cause; fixed a metric-inflation flaw in offline evaluation and benchmarked CF algorithms for a clear accuracy lift.</li>
+        </ul>
+      </div>
+      <div class="exp-date">07/2023 – 09/2023</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-header fade-in">
+    <p class="section-num">05 — Resume</p>
+    <h2 class="section-title">Full background</h2>
+  </div>
+  <div class="resume-wrapper fade-in">
+    <div class="resume-section">
+      <div class="resume-section-title">Education</div>
+      <div class="resume-item">
+        <div>
+          <div class="resume-item-title">Lingnan University, Hong Kong</div>
+          <div class="resume-item-sub">MSc Data Science · ML, DL, CV, Data Mining, AI</div>
+        </div>
+        <div class="resume-item-date">09/2025 – 06/2026</div>
+      </div>
+      <div class="resume-item">
+        <div>
+          <div class="resume-item-title">Guangzhou Maritime University</div>
+          <div class="resume-item-sub">BA Economics &amp; Management</div>
+        </div>
+        <div class="resume-item-date">09/2021 – 06/2025</div>
+      </div>
+    </div>
+    <div class="resume-section">
+      <div class="resume-section-title">Languages</div>
+      <div class="cert-list">
+        <span class="cert-tag">Mandarin (Native)</span>
+        <span class="cert-tag">Cantonese (Native)</span>
+        <span class="cert-tag">English (IELTS 6.0)</span>
+      </div>
+    </div>
+    <div class="resume-section">
+      <div class="resume-section-title">Technical Skills</div>
+      <div class="resume-skills-grid">
+        <span class="resume-skill-tag">Python</span>
+        <span class="resume-skill-tag">PyTorch</span>
+        <span class="resume-skill-tag">TensorFlow</span>
+        <span class="resume-skill-tag">LLaMA-Factory</span>
+        <span class="resume-skill-tag">LoRA Fine-tuning</span>
+        <span class="resume-skill-tag">Qwen2.5-7B</span>
+        <span class="resume-skill-tag">YOLO</span>
+        <span class="resume-skill-tag">ResNet</span>
+        <span class="resume-skill-tag">MobileNetV2</span>
+        <span class="resume-skill-tag">SE-Attention</span>
+        <span class="resume-skill-tag">scikit-learn</span>
+        <span class="resume-skill-tag">NumPy</span>
+        <span class="resume-skill-tag">pandas</span>
+        <span class="resume-skill-tag">Matplotlib</span>
+        <span class="resume-skill-tag">Gradio</span>
+        <span class="resume-skill-tag">Git / GitHub</span>
+        <span class="resume-skill-tag">Jupyter</span>
+        <span class="resume-skill-tag">Claude Code</span>
+      </div>
+    </div>
+    <a href="resume.pdf" class="resume-download" target="_blank">↓ Download Full CV (PDF)</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <p class="section-num">06 — Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+  </div>
+  <div class="contact-grid fade-in">
+    <div>
+      <p class="contact-intro">I am open to AI engineer, algorithm engineer, and data science roles in Shenzhen, Hong Kong, or remote. Feel free to reach out — I respond within a day.</p>
+      <div class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <a href="mailto:yangsijun233@gmail.com" class="contact-item-value">yangsijun233@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <a href="tel:+8618207579044" class="contact-item-value">+86 182 0757 9044</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">GitHub</span>
+        <a href="https://github.com/2499146834-arch" target="_blank" class="contact-item-value">github.com/2499146834-arch</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Location</span>
+        <span class="contact-item-value">Hong Kong · Target: Shenzhen / Hong Kong</span>
+      </div>
+    </div>
+    <div>
+      <div class="available-badge">
+        <span class="available-dot"></span>
+        Currently available
+      </div>
+      <div class="contact-cta">Let's build something that ships.</div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Yang Sijun · Personal Job-Seeking Site</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
